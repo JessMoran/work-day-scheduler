@@ -69,11 +69,13 @@ function setEvents() {
   userEvents = JSON.parse(localStorage.getItem('userEvents'));
   let keys = Object.keys(userEvents);
 
-  let hourArr = ($('.hour').text()).trim();
-  let descArr = $('.description');
+  $('.time-block').each(function (i, element) {
+    let hourKey = ($(element).text()).trim();
+    let getValue = userEvents[hourKey];
 
-  $(descArr).each(function (i, element) {
-    console.log(i,element);
+    let siblings = $(element).siblings(); //Bring its sibling
+    let nephew = $(siblings).children(); //Bring its sibling's children
+    nephew.val(getValue);
   })
 }
 
