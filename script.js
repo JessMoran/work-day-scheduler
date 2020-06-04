@@ -12,8 +12,16 @@ let time = (moment().hours());
 
 //Get elements who has time-block class
 $('.time-block').each(function() {
-  //Get child's text
-  schedulerHr =  $(this).text();
+  let timeChildren = $(this).children(); //Get time-block children
+  let hourSpan = $(timeChildren).children(); //Get time-block grandchildren
+  let hourVal = hourSpan.text(); //Get grandchildren text
+
+  //Validates if the hourVal is short or long and applies different slice for each one
+  if ( hourVal === '9:00'){
+    schedulerHr = hourVal.slice(0, 1); //Take just the number
+  } else {
+    schedulerHr = hourVal.slice(0, 2); //Take just the number
+  }
 
   //Add a class for each nephew if the schedulerHr has an hour less than the current
   if ( schedulerHr < time ){
@@ -46,7 +54,16 @@ $(document).on("click", ".saveBtn", function() {
   let cousin1 = $(sibling[0]).children();  //Hour div
   let cousin2 = $(sibling[1]).children();  //Textarea
   let scheduleHr = (cousin1.text()).trim();  //Div text
-  let userTxt = (cousin2.val()).trim();  //Textarea text
+  let userTxt;
+
+  for (const childElem of cousin2) { //Iterates cousin2
+    if (childElem.localName === 'textarea') { //Validate its son is a textarea
+      userTxt = ($(childElem).val()).trim();  //Get text from the text area
+      if ( userTxt === ''){ //Checks if the textarea is empty
+        return;//Take of the function
+      }
+    }
+  }
 
   //Save data in localStorage
   //If localstorage is empty creates new array and save the first event
