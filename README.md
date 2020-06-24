@@ -21,7 +21,7 @@ The following link demonstrates the deploying app:
 https://jessmoran.github.io/work-day-scheduler/
 
 ## To run 
-- Download or fork the application from [here]https://github.com/JessMoran/work-day-scheduler
+- Download or fork the application from [here](https://github.com/JessMoran/work-day-scheduler)
 - Select ``ìndex.html`` to start the app
 
 ## Developer
